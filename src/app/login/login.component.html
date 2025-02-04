@@ -1,0 +1,93 @@
+
+<div class="min-h-screen bg-gray-400 flex flex-col rounded-md justify-center py-12 sm:px-6 lg:px-8">
+  <div class="relative w-96 h-80 mx-auto mt-8 rounded-lg overflow-hidden shadow-lg">
+    <img *ngFor="let imagen of imagenes; let i = index"
+         [src]="'assets/imagenes/' + imagen"
+         [ngClass]="{'opacity-100': i === imagenActual, 'opacity-0': i !== imagenActual}"
+         class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out"
+         alt="Logo Zeka">
+        
+  </div>
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md text-center">
+    <h2 class="text-3xl font-extrabold text-gray-900">Iniciar sesión</h2>
+  </div>
+  
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      
+      <form class="space-y-6" #loginForm="ngForm" (ngSubmit)="login()">
+       
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+          <div class="mt-1">
+            <input id="email" name="email" type="email" autocomplete="email" required [(ngModel)]="formData.email" #email="ngModel"
+                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                   [class.border-red-500]="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-xs mt-1">Correo electrónico inválido.</div>
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <div class="mt-1">
+            <input id="password" name="password" type="password" autocomplete="current-password" required [(ngModel)]="formData.password" #password="ngModel"
+                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                   [class.border-red-500]="password.invalid && (password.dirty || password.touched)">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-red-500 text-xs mt-1">La contraseña es obligatoria.</div>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+              </svg>
+            </span>
+            Iniciar Sesión
+          </button>
+        </div>
+      </form>
+      <div class="mt-4 text-center">
+        <a routerLink="/recuperar-contrasena" class="text-sm text-indigo-600 hover:text-indigo-500">
+          ¿Olvidaste tu contraseña?
+        </a>
+      </div>
+      <div *ngIf="showError" class="mt-4 bg-yellow-500 text-white p-2 rounded shadow-lg text-center">
+        Usuario o contraseña incorrectos.
+      </div>
+    </div>
+  </div>
+  <!-- Ventana de carga -->
+  <div *ngIf="showLoading" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-white p-4 rounded shadow-md text-center">
+      <p class="text-lg font-semibold">Cargando...</p>
+    </div>
+  </div>
+  
+  <!-- Mensaje de éxito -->
+  <div *ngIf="showSuccess" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow-md text-center">
+      <p class="text-4xl font-bold mb-4">Inicio exitoso</p>
+      <div class="loader mx-auto"></div>
+    </div>
+  </div>
+  <style>
+    .loader {
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+      margin: 0 auto; /* Centrar el spinner horizontalmente */
+    }
+  
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</div>

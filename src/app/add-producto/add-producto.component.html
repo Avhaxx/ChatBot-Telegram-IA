@@ -1,0 +1,35 @@
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-2xl">
+      <h1 class="text-2xl font-bold mb-4">Añadir Producto</h1>
+      <form [formGroup]="productoForm" (ngSubmit)="onYesClick()">
+        <div class="mb-6">
+          <label for="nombre" class="block text-left mb-2">Nombre del Producto:</label>
+          <input id="nombre" formControlName="nombre" class="w-full p-2 border border-gray-300 rounded" />
+          <div *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)" class="text-red-500 mt-2">
+            <div *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</div>
+            <div *ngIf="nombre?.errors?.['pattern']">El nombre solo puede contener letras, números, espacios y guiones.</div>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label for="descripcion" class="block text-left mb-2">Descripción del Producto:</label>
+          <input id="descripcion" formControlName="descripcion" class="w-full p-2 border border-gray-300 rounded" />
+          <div *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)" class="text-red-500 mt-2">
+            <div *ngIf="descripcion?.errors?.['required']">La descripción es obligatoria.</div>
+            <div *ngIf="descripcion?.errors?.['pattern']">La descripción solo puede contener letras, números, espacios y guiones.</div>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label for="precio" class="block text-left mb-2">Precio del Producto:</label>
+          <input id="precio" formControlName="precio" class="w-full p-2 border border-gray-300 rounded" />
+          <div *ngIf="precio?.invalid && (precio?.dirty || precio?.touched)" class="text-red-500 mt-2">
+            <div *ngIf="precio?.errors?.['required']">El precio es obligatorio.</div>
+            <div *ngIf="precio?.errors?.['pattern']">El precio debe ser un número válido con hasta dos decimales.</div>
+          </div>
+        </div>
+        <div class="flex justify-between w-full">
+          <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" (click)="onNoClick()">Cancelar</button>
+          <button type="submit" class="bg-teal-600 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded" [disabled]="productoForm.invalid">Añadir</button>
+        </div>
+      </form>
+    </div>
+  </div>

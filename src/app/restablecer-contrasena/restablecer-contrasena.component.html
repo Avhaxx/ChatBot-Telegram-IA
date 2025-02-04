@@ -1,0 +1,34 @@
+<div class="min-h-screen bg-gray-400 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+      <h2 class="text-3xl font-extrabold text-gray-900">Restablecer Contraseña</h2>
+      <p class="mt-2 text-lg text-black">
+        Ingresa tu nueva contraseña.
+      </p>
+    </div>
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <form (ngSubmit)="restablecerContrasena()" #restablecerForm="ngForm">
+          <div class="mt-4">
+            <label for="new_password" class="block text-sm font-medium text-gray-700">Nueva Contraseña</label>
+            <div class="mt-1">
+              <input id="new_password" name="new_password" type="password" required [(ngModel)]="new_password" #newPasswordRef="ngModel"
+                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     [class.border-red-500]="newPasswordRef.invalid && (newPasswordRef.dirty || newPasswordRef.touched)">
+              <div *ngIf="newPasswordRef.invalid && (newPasswordRef.dirty || newPasswordRef.touched)" class="text-red-500 text-xs mt-1">
+                Contraseña inválida.
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <button type="submit" [disabled]="restablecerForm.invalid"
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
+              Restablecer Contraseña
+            </button>
+          </div>
+        </form>
+        <div *ngIf="mensajeEnviado" class="mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+          Contraseña restablecida exitosamente.
+        </div>
+      </div>
+    </div>
+  </div>
